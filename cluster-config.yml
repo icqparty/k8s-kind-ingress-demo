@@ -1,5 +1,6 @@
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+name: wi-cluster
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
@@ -15,7 +16,14 @@ nodes:
   - containerPort: 443
     hostPort: 1443
     protocol: TCP
-
 #! Note: Choose 1080 and 1443 due to
 # Command Output: Error: rootlessport cannot expose privileged port 80, you can add 'net.ipv4.ip_unprivileged_port_start=80' to /etc/sysctl.conf (currently 1024), or choose a larger port number (>= 1024): listen tcp 0.0.0.0:80: bind: permission denied
 
+networking:
+  # WARNING: It is _strongly_ recommended that you keep this the default
+  # (127.0.0.1) for security reasons. However it is possible to change this.
+  apiServerAddress: "0.0.0.0"
+  # By default the API server listens on a random open port.
+  # You may choose a specific port but probably don't need to in most cases.
+  # Using a random port makes it easier to spin up multiple clusters.
+  apiServerPort: 6443
