@@ -62,7 +62,8 @@ metadata:
     workload: ingress-demo
 spec:
   rules:
-  - http:
+  - host: host.local
+    http:
       paths:
       - path: /foo
         pathType: Prefix
